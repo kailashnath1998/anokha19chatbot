@@ -1,0 +1,69 @@
+/* .thunderl {
+    position: absolute;
+    left: 95%;
+    width: 5%;
+    height: 84.5vh;
+    clip-path: polygon(150% 0%, 200% 0%, 100% 45%, 200% 45%,200% 55%, 50% 100%, 0% 100%, 150% 55%,0% 55%);
+    background: url("https://www.pixelo.net/wp-content/uploads/2017/07/02_free-duotone-photoshop-effects-pixelo.jpg ")
+  }
+
+
+.thunderr {
+    position: absolute;
+    left: 0%;
+    width: 5%;
+    height: 84.5vh;
+    clip-path: polygon(50% 0%, 100% 0%, 0% 45%, 100% 45%,100% 55%, -50% 100%, -100% 100%, 50% 55%, -100% 55%);
+    background: url("https://www.pixelo.net/wp-content/uploads/2017/07/02_free-duotone-photoshop-effects-pixelo.jpg ")
+} */
+
+.left {
+    float: left;
+    position: absolute;
+    width: 55%;
+    height: 84.5vh;
+    clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 50%, 90% 100%,0 100%);
+    background-image: url(https://www.pixelo.net/wp-content/uploads/2017/07/02_free-duotone-photoshop-effects-pixelo.jpg);
+}
+
+.right {
+    float: right;
+    position: absolute;
+    left: 45%;
+    width: 55%;
+    height: 84.5vh;
+    /* clip-path: polygon(10% 0, calc(100%) 0, 100% 100%, -10% 100%, 10% 50%,-10% 50%,0 100%); */
+    background-image: url(http://d1i3xayf43lpeg.cloudfront.net/58l7lmmaka1i/2jqTg1i70ce8G6yUyIi624/77fcf976d461fd96715da306b0afec34/cover.jpg);;
+}
+
+.right .text {
+    margin-left: 50%;
+}
+
+.left .htext {
+    margin-left: 100%; 
+}
+
+.rightContent {
+    float: left;
+    position: absolute;
+    left: 55%;
+    width: 45%;
+    height: 84.5vh;
+    padding-left: 5%;
+    background: white;
+    display: none;
+    size: 100px;
+
+}
+
+.leftContent {
+    float: left;
+    position: absolute;
+    width: 55%;
+    height: 84.5vh;
+    clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 50%, 90% 100%,0 100%);
+    background: white;
+    size: 100px;
+    display: none;
+}
