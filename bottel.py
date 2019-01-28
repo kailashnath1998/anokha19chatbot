@@ -47,19 +47,19 @@ admin = ['393347098']
 app = Bottle()
 
 
-@app.route('/', method = 'GET')
+@app.route('/bot', method = 'GET')
 def home():
 	return static_file('chatbotv2.html', root='./')
 
-@app.route('/js/<filename:re:.*\.js>')
+@app.route('/bot/js/<filename:re:.*\.js>')
 def js(filename):
 	return static_file(filename, root='./static/js/')
 
-@app.route('/css/:filename#.*#')
+@app.route('/bot/css/:filename#.*#')
 def css(filename):
 	return static_file(filename, root='./static/css/')
 
-@app.route('/assets/:filename#.*#')
+@app.route('/bot/assets/:filename#.*#')
 def css(filename):
 	return static_file(filename, root='./static/assets/')
 
