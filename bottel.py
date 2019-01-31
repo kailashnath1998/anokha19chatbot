@@ -75,6 +75,7 @@ def enable_cors():
 
 
 @app.route('/api', method = "POST")
+@app.route('/bot/api', method = "POST")
 def api():
 	if request.cookies.get('id') == None:
 		nw = str(datetime.datetime.now())[-15:]
