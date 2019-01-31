@@ -47,19 +47,19 @@ admin = ['393347098']
 app = Bottle()
 
 
-@app.route('/bot', method = 'GET')
+@app.route('/', method = 'GET')
 def home():
 	return static_file('chatbotv2.html', root='./')
 
-@app.route('/bot/js/<filename:re:.*\.js>')
+@app.route('/js/<filename:re:.*\.js>')
 def js(filename):
 	return static_file(filename, root='./static/js/')
 
-@app.route('/bot/css/:filename#.*#')
+@app.route('/css/:filename#.*#')
 def css(filename):
 	return static_file(filename, root='./static/css/')
 
-@app.route('/bot/assets/:filename#.*#')
+@app.route('/assets/:filename#.*#')
 def css(filename):
 	return static_file(filename, root='./static/assets/')
 
@@ -74,7 +74,7 @@ def enable_cors():
     response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
 
-@app.route('/bot/api', method = "POST")
+@app.route('/api', method = "POST")
 def api():
 	if request.cookies.get('id') == None:
 		nw = str(datetime.datetime.now())[-15:]
