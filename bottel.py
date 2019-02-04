@@ -25,7 +25,8 @@ bot_ = ChatBot(
     filters=[
 #         'chatterbot.filters.RepetitiveResponseFilter'
     ],
-    database_uri='mongodb://localhost:27017/chatterbot-database'
+    database_uri='mongodb://localhost:27017/chatterbot-database',
+	read_only = True
 )
 
 # bot_.set_trainer(ChatterBotCorpusTrainer)
@@ -87,7 +88,10 @@ def api():
 	print(chat_id)
 	msg = request.forms.get('data')
 
-	if msg == '/error':
+	if len(msg) == 0:
+		reply = 'You can\'t send me a Empty text' 
+
+	elif msg == '/error':
 		with open("errors.txt", "a") as file:
 			writeData = "cid-" + str(chat_id) + "-txt-" + str(prevText[chat_id]) + "-rep-" + str(prevReply[chat_id]) + "\n"
 			file.write(writeData)
