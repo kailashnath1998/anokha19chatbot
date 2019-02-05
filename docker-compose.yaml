@@ -1,0 +1,16 @@
+version: "3"
+services:
+  db:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - "$HOME/mongo:/data/db"
+    ports:
+      - "27017:27017"
+  chatbot:
+    build: .
+    depends_on:
+      - db
+    container_name: anokhachatbot
+    ports:
+      - "3005:6789"
