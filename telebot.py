@@ -66,6 +66,9 @@ params = {
 }
 
 
+bot.sendMessage(393347098, "Bot Restatred")
+
+
 # In[ ]:
 
 
