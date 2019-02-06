@@ -8,4 +8,6 @@ RUN pip install -r requirments.txt
 
 EXPOSE 6789
 
-CMD ["python" ,"bottel.py", "&& python telebot.py"]
+CMD ["python" ,"bottel.py", "&"]
+
+CMD ["python" ,"telebot.py", "&"]
