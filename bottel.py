@@ -93,7 +93,14 @@ def api():
     msg = request.forms.get('data')
 
     if len(msg) == 0:
-        reply = 'You can\'t send me a Empty text'
+        reply = 'You can\'t send me an empty text'
+        resp = {"reply": reply}
+        return dict(data=resp)
+        
+    msg = msg.strip()
+    
+    if len(msg) == 0:
+        reply = 'Am I a joke to you -_-'
 
     elif msg == '/error':
         with open("errors.txt", "a") as file:
