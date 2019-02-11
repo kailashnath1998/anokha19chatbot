@@ -13,7 +13,8 @@ import json
 import re
 
 logging.basicConfig(level=logging.INFO)
-
+escape = ''.join([chr(char) for char in range(1, 32)])
+escapes = s.maketrans(escape,'                               ')
 
 bot_ = ChatBot(
     'Anokha',
