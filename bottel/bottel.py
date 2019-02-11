@@ -10,7 +10,7 @@ import sys
 from telepot.loop import MessageLoop
 from bottle import static_file
 import json
-import re
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -93,16 +93,7 @@ def api():
     msg = request.forms.get('data')
 
     if len(msg) == 0:
-        reply = 'You can\'t send me an empty text'
-        resp = {"reply": reply}
-        return dict(data=resp)
-        
-    msg = msg.strip()
-    msg = re.sub(r'\\\w', '', msg)
-    msg = msg.translate(escapes)
-    
-    if len(msg) == 0:
-        reply = 'Am I a joke to you -_-'
+        reply = 'You can\'t send me a Empty text'
 
     elif msg == '/error':
         with open("errors.txt", "a") as file:

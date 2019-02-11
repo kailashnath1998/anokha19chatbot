@@ -1,0 +1,334 @@
+<html lang='en' class=''>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<!--     <script src="/js/chatbotv2.js"></script> -->
+    <style class="cp-pen-styles">
+        body {
+            background: #ff9966;
+            background: linear-gradient(to right, #ff5e62, #ff9966);
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        * {
+            box-sizing: border-box;
+            position: relative;
+            font-family: 'Dosis', sans-serif !important;
+        }
+
+        .chatbox {
+            background: #fafafa;
+            min-height: 300px;
+            width: 260px;
+            box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.21), 0px 30px 20px -10px rgba(0, 0, 0, 0.2), 0px 60px 20px -30px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-width: 260px;
+            max-height: 300px;
+        }
+
+        .chatbox__header {
+            width: 100%;
+            height: 50px;
+            background: #ff9966;
+            /* fallback for old browsers */
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #ff5e62, #ff9966);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbox__header .title {
+            color: #fff;
+            text-align: center;
+        }
+
+        .chatbox__header svg {
+            position: absolute;
+            left: 20px;
+            fill: white;
+            transition: .3s ease-in-out;
+        }
+
+        .chatbox__header svg:hover {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+            transition: .3s ease-in-out;
+        }
+
+        .chatbox__body {
+            height: 290px;
+            width: 100%;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column-reverse;
+            overflow: auto;
+            padding: 10px 10px 20px;
+        }
+
+        .chatbox__body .message {
+            display: block;
+            width: auto;
+            margin: 5px;
+            align-self: flex-start;
+            flex-direction: row;
+            max-width: 60%;
+            word-wrap: break-word;
+        }
+
+        .chatbox__body .message img {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            -webkit-animation: image 0.2s;
+            /* Safari 4.0 - 8.0 */
+            animation: image 0.2s;
+        }
+
+        .chatbox__body .message.receive {
+            padding-left: 30px;
+        }
+
+        .chatbox__body .message.receive .message_text {
+            margin-left: 10px;
+            padding: 10px;
+            border-radius: 3px;
+            background: #fff;
+            animation: starkMessage .2s;
+            -webkit-animation: starkMessage 0.2s;
+            /* Safari 4.0 - 8.0 */
+        }
+
+        .chatbox__body .message.receive .message_text:before {
+            position: absolute;
+            content: " ";
+            left: -5px;
+            bottom: 0;
+            border-right: solid 10px #fff;
+            border-top: solid 10px transparent;
+            z-index: 0;
+        }
+
+        .chatbox__body .message.receive img {
+            position: absolute;
+            left: 0;
+            bottom: -15px;
+        }
+
+        .chatbox__body .message.sender {
+            color: white;
+            align-self: flex-end;
+            padding-right: 30px;
+        }
+
+        .chatbox__body .message.sender .message_text {
+            margin-right: 10px;
+            background: #ff9966;
+            background: linear-gradient(to left, #ff5e62, #ff9966);
+            padding: 10px;
+            border-radius: 3px;
+            z-index: 99;
+            animation: starkMessage .2s;
+            -webkit-animation: starkMessage 0.2s;
+            /* Safari 4.0 - 8.0 */
+        }
+
+        .chatbox__body .message.sender .message_text:after {
+            position: absolute;
+            content: " ";
+            right: -5px;
+            bottom: 0;
+            border-left: solid 10px #ff5e62;
+            border-top: solid 10px transparent;
+            z-index: 0;
+        }
+
+        .chatbox__body .message.sender img {
+            position: absolute;
+            right: 0;
+            bottom: -15px;
+        }
+
+        .chatbox__input {
+            display: flex;
+            width: 100%;
+            background: #fff;
+            height: 60px;
+            border-top: .5px solid #efefef;
+        }
+
+        .chatbox__input input {
+            flex: 3;
+            padding: 1em 2em;
+            outline: none;
+            border: 0;
+            letter-spacing: .1em;
+        }
+
+        .chatbox__input button {
+            outline: none;
+            border: 0;
+            flex: 1;
+            background: white;
+        }
+
+        .chatbox__input svg {
+            fill: #ff9966;
+        }
+
+        ::-webkit-input-placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #dedede;
+            opacity: 1;
+            /* Firefox */
+        }
+
+        :-ms-input-placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #dedede;
+            opacity: 1;
+            /* Firefox */
+        }
+
+        ::-ms-input-placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #dedede;
+            opacity: 1;
+            /* Firefox */
+        }
+
+        ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #dedede;
+            opacity: 1;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body>
+    <div class='chatbox'>
+        <div class='chatbox__header'>
+            <div class='title'>
+                Anokha Bot
+            </div>
+        </div>
+        <div class='chatbox__body'>
+            <!-- <div class='message receive'>
+                <img src='https://d2gcv4sxt84gxu.cloudfront.net/uploads/avatars/995064/original.png?1450125781'>
+                <div class='message_text'>
+                    Hello There
+                </div>
+            </div> -->
+        </div>
+        <div class='chatbox__input'>
+            <input id="msgtext" placeholder='Type something here'>
+            <button id="sndbtn">
+                <svg height='24' viewbox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+                    <path d='M2.01 21L23 12 2.01 3 2 10l15 2-15 2z'></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <script>var send = document.querySelector('.chatbox__input svg');
+        var body = document.querySelector('.chatbox__body');
+        var input = document.querySelector('input');
+        let boturl = '/bot/api'
+
+        var messageController = function () {
+
+
+
+            return {
+                sendMessage: function () {
+                    $("#msgtext").prop("disabled", true);
+                    $("#sndbtn").prop("disabled", true);
+                    var message_container = document.createElement("div");
+                    var message = `<img src="http://www.gravatar.com/avatar/0987da15982b5eb15c04740a95dd7ad3?s=64&d=identicon"/>
+      <div class="message_text"> ${input.value} </div>`;
+                    message_container.className = "message sender";
+                    message_container.innerHTML = message;
+                    body.insertBefore(message_container, body.firstChild);
+                    message_ = input.value;
+                    input.value = "";
+                },
+                starkReply: function () {
+
+
+
+                    let formData = {
+                        'data': message_
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: boturl,
+                        contentType: 'application/x-www-form-urlencoded',
+                        data: formData,
+                        crossDomain: true,
+                        credentials: 'same-origin',
+                        success: function (data, textStatus, xmLHttpRequest) {
+                            console.log(data);
+                            var reply = data['data']['reply']
+                            var message_container = document.createElement("div");
+                            var message = `<img src="https://anokha.amrita.edu/assets/AnokhaLogoSquareTrans.png"/>
+      <div class="message_text"> ${reply} </div>`;
+                            message_container.className = "message receive";
+                            message_container.innerHTML = message;
+                            body.insertBefore(message_container, body.firstChild);
+                            $("#msgtext").prop('disabled', false);
+                            $("#sndbtn").prop("disabled", false);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(thrownError);
+                            toastr.error('Somthing is wrong', 'Error');
+                            var reply = 'Something went wrong'
+                            $("#" + id).html(replace_bot_innercontects('Somthing is wrong at the server side'));
+                            var message = `<img src="https://d2gcv4sxt84gxu.cloudfront.net/uploads/avatars/995064/original.png?1450125781"/>
+      <div class="message_text"> ${reply} </div>`;
+                            message_container.className = "message receive";
+                            message_container.innerHTML = message;
+                            body.insertBefore(message_container, body.firstChild);
+                            $("#msgtext").prop('disabled', false);
+                            $("#sndbtn").prop("disabled", false);
+                        },
+                    });
+
+                }
+            };
+
+        }();
+
+        var init = function (messageController) {
+            ['click', 'keyup'].forEach(event => document.addEventListener(event, handler));
+
+            function handler(e) {
+                if (e.target == send || e.keyCode == 13) {
+                    messageController.sendMessage();
+                    setTimeout(messageController.starkReply, 1000);
+                }
+            }
+        }(messageController);
+        // # sourceURL = pen.js
+    </script>
+</body>
+
+</html>
