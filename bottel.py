@@ -100,7 +100,7 @@ def api():
         
     msg = msg.strip()
 
-    msg = re.sub(r'[\\[a-z]*','', msg)
+    msg = re.sub(r'\\[a-z]','', msg)
     msg=re.sub(r'\+',' + ',msg)    
     msg=re.sub(r'\*',' * ',msg) 
     msg=re.sub(r'\-',' - ',msg) 
