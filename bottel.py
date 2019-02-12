@@ -13,8 +13,7 @@ import json
 import re
 
 logging.basicConfig(level=logging.INFO)
-
-
+escape = ''.join([chr(char) for char in range(1, 32)])
 bot_ = ChatBot(
     'Anokha',
     storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
@@ -98,8 +97,12 @@ def api():
         return dict(data=resp)
         
     msg = msg.strip()
-    msg=re.sub('[^A-Za-z0-9]',' ',msg)
-    
+    msg = re.sub(r'[\\[a-z]*','', msg)
+    msg=re.sub(r'\+',' + ',msg)    
+    msg=re.sub(r'\*',' * ',msg) 
+    msg=re.sub(r'\-',' - ',msg) 
+    msg=re.sub(r'\\',' \ ',msg) 
+    print(msg)
     if len(msg) == 0:
         reply = 'Am I a joke to you -_-'
 
