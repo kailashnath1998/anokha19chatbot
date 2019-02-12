@@ -99,12 +99,8 @@ def api():
         return dict(data=resp)
         
     msg = msg.strip()
-
-    msg = re.sub(r'[\\[a-z]*','', msg)
-    msg=re.sub(r'\+',' + ',msg)    
-    msg=re.sub(r'\*',' * ',msg) 
-    msg=re.sub(r'\-',' - ',msg) 
-    msg=re.sub(r'\\',' \ ',msg) 
+    msg = re.sub(r'\\\w', '', msg)
+    msg = msg.translate(escapes)
 
 
     if len(msg) == 0:
